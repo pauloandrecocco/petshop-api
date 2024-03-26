@@ -18,10 +18,10 @@ async function createAnimal(req, res, next) {
 }
 
 async function listAnimais(req, res, next) {
-  const { proprietario_id } = req.query;
+  const { proprietarioId } = req.query;
 
   try {
-    res.send(await AnimalService.listAnimais(proprietario_id));
+    res.send(await AnimalService.listAnimais(proprietarioId));
     logger.info(`${req.method} ${req.baseUrl} - Success`);
   } catch (err) {
     next(err);
@@ -29,12 +29,12 @@ async function listAnimais(req, res, next) {
 }
 
 async function getAnimal(req, res, next) {
-  const { animal_id } = req.params;
+  const { animalId } = req.params;
 
   try {
-    validateId(animal_id, "Animal");
+    validateId(animalId, "Animal");
 
-    res.send(await AnimalService.getAnimal(animal_id));
+    res.send(await AnimalService.getAnimal(animalId));
     logger.info(`${req.method} ${req.baseUrl}/:id - Success`);
   } catch (err) {
     next(err);
@@ -42,12 +42,12 @@ async function getAnimal(req, res, next) {
 }
 
 async function deleteAnimal(req, res, next) {
-  const { animal_id } = req.params;
+  const { animalId } = req.params;
 
   try {
-    validateId(animal_id, "Animal");
+    validateId(animalId, "Animal");
 
-    await AnimalService.deleteAnimal(animal_id);
+    await AnimalService.deleteAnimal(animalId);
 
     res.end();
     logger.info(`${req.method} ${req.baseUrl}/:id - Success`);
@@ -57,14 +57,13 @@ async function deleteAnimal(req, res, next) {
 }
 
 async function updateAnimal(req, res, next) {
-  const { animal_id } = req.params;
+  const { animalId } = req.params;
   const animal = req.body;
 
   try {
-    validateId(animal_id, "Animal");
-    validateAnimal(animal);
+    validateId(animalId, "Animal");
 
-    res.send(await AnimalService.updateAnimal(animal_id, animal));
+    res.send(await AnimalService.updateAnimal(animalId, animal));
     logger.info(`${req.method} ${req.baseUrl} - Success`);
   } catch (err) {
     next(err);

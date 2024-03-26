@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post("/", ProprietarioController.createProprietario);
 router.get("/", ProprietarioController.listProprietarios);
-router.get("/:proprietario_id", ProprietarioController.getProprietario);
-router.delete("/:proprietario_id", ProprietarioController.deleteProprietario);
-router.put("/:proprietario_id", ProprietarioController.updateProprietario);
+router.get("/:proprietarioId", ProprietarioController.getProprietario);
+router.delete("/:proprietarioId", ProprietarioController.deleteProprietario);
+router.put("/:proprietarioId", ProprietarioController.updateProprietario);
 
 // Error handling
 router.use((err, req, res, next) => {

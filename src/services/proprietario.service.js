@@ -13,13 +13,13 @@ async function listProprietarios() {
   return await ProprietarioRepository.listProprietarios();
 }
 
-async function getProprietario(proprietario_id) {
-  return await ProprietarioRepository.getProprietario(proprietario_id);
+async function getProprietario(proprietarioId) {
+  return await ProprietarioRepository.getProprietario(proprietarioId);
 }
 
-async function deleteProprietario(proprietario_id) {
+async function deleteProprietario(proprietarioId) {
   const animais = await AnimalRepository.listAnimaisByProprietarioId(
-    proprietario_id
+    proprietarioId
   );
   if (animais.length > 0) {
     const error = errorHandler(
@@ -29,19 +29,14 @@ async function deleteProprietario(proprietario_id) {
     throw error;
   }
 
-  await ProprietarioRepository.deleteProprietario(proprietario_id);
+  await ProprietarioRepository.deleteProprietario(proprietarioId);
 }
 
-async function updateProprietario(proprietario_id, proprietario) {
-  const { nome, telefone } = await ProprietarioRepository.getProprietario(
-    proprietario_id
+async function updateProprietario(proprietarioId, proprietario) {
+  return await ProprietarioRepository.updateProprietario(
+    proprietarioId,
+    proprietario
   );
-
-  return await ProprietarioRepository.updateProprietario({
-    proprietario_id,
-    nome: proprietario.nome ?? nome,
-    telefone: proprietario.tipo ?? telefone,
-  });
 }
 
 export default {

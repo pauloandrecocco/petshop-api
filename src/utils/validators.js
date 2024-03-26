@@ -25,13 +25,13 @@ function validateProprietario(proprietario) {
 }
 
 function validateAnimal(animal) {
-  const { nome, tipo, proprietario_id } = animal;
+  const { nome, tipo, proprietarioId } = animal;
 
   if (!nome || !tipo || typeof nome !== "string" || typeof tipo !== "string") {
     const error = errorHandler(400, `Informe Nome e Tipo válidos.`);
     throw error;
   }
-  validateId(proprietario_id, "Proprietário");
+  validateId(proprietarioId, "Proprietário");
 }
 
 export { validateId, validateProprietario, validateAnimal };

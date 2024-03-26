@@ -27,46 +27,42 @@ async function listProprietarios(req, res, next) {
 }
 
 async function getProprietario(req, res, next) {
-  const { proprietario_id } = req.params;
+  const { proprietarioId } = req.params;
 
   try {
-    validateId(proprietario_id, "Proprietário");
+    validateId(proprietarioId, "Proprietário");
 
-    res.send(await ProprietarioService.getProprietario(proprietario_id));
-    logger.info(`${req.method} ${req.baseUrl}/:proprietario_id - Success`);
+    res.send(await ProprietarioService.getProprietario(proprietarioId));
+    logger.info(`${req.method} ${req.baseUrl}/:proprietarioId - Success`);
   } catch (err) {
     next(err);
   }
 }
 
 async function deleteProprietario(req, res, next) {
-  const { proprietario_id } = req.params;
+  const { proprietarioId } = req.params;
 
   try {
-    validateId(proprietario_id, "Proprietário");
+    validateId(proprietarioId, "Proprietário");
 
-    await ProprietarioService.deleteProprietario(proprietario_id);
+    await ProprietarioService.deleteProprietario(proprietarioId);
 
     res.end();
-    logger.info(`${req.method} ${req.baseUrl}/:proprietario_id - Success`);
+    logger.info(`${req.method} ${req.baseUrl}/:proprietarioId - Success`);
   } catch (err) {
     next(err);
   }
 }
 
 async function updateProprietario(req, res, next) {
-  const { proprietario_id } = req.params;
+  const { proprietarioId } = req.params;
   const proprietario = req.body;
 
   try {
-    validateId(proprietario_id, "Proprietário");
-    validateProprietario(proprietario);
+    validateId(proprietarioId, "Proprietário");
 
     res.send(
-      await ProprietarioService.updateProprietario(
-        proprietario_id,
-        proprietario
-      )
+      await ProprietarioService.updateProprietario(proprietarioId, proprietario)
     );
     logger.info(`${req.method} ${req.baseUrl} - Success`);
   } catch (err) {

@@ -1,10 +1,11 @@
+import "dotenv/config";
 import express from "express";
 import winston from "winston";
 import cors from "cors";
 
 // Routers
-import proprietarioRouter from "./routes/proprietario.route.js";
-import animalRouter from "./routes/animal.route.js";
+import proprietarioRouter from "./src/routes/proprietario.route.js";
+import animalRouter from "./src/routes/animal.route.js";
 
 const { combine, timestamp, label, printf } = winston.format;
 const logFormat = printf(({ level, message, label, timestamp }) => {

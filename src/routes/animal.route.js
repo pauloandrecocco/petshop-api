@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post("/", AnimalController.createAnimal);
 router.get("/", AnimalController.listAnimais);
-router.get("/:animal_id", AnimalController.getAnimal);
-router.delete("/:animal_id", AnimalController.deleteAnimal);
-router.put("/:animal_id", AnimalController.updateAnimal);
+router.get("/:animalId", AnimalController.getAnimal);
+router.delete("/:animalId", AnimalController.deleteAnimal);
+router.put("/:animalId", AnimalController.updateAnimal);
 
 // Error handling
 router.use((err, req, res, next) => {
