@@ -4,8 +4,9 @@ import winston from "winston";
 import cors from "cors";
 
 // Routers
-import proprietarioRouter from "./src/routes/proprietario.route.js";
 import animalRouter from "./src/routes/animal.route.js";
+import proprietarioRouter from "./src/routes/proprietario.route.js";
+import servicoRouter from "./src/routes/servico.route.js";
 
 const { combine, timestamp, label, printf } = winston.format;
 const logFormat = printf(({ level, message, label, timestamp }) => {
@@ -30,8 +31,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use("/proprietario", proprietarioRouter);
-app.use("/animal", animalRouter);
+app.use("/proprietarios", proprietarioRouter);
+app.use("/animais", animalRouter);
+app.use("/servicos", servicoRouter);
 
 app.listen(3000, async () => {
   logger.info("API rodando na porta 3000.");

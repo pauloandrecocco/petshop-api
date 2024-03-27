@@ -1,12 +1,12 @@
 import Sequelize from "sequelize";
 
 // Database
-import db from "../../config/db.js";
+import { sequelize } from "../../config/db.js";
 
 // Models
 import Proprietario from "./proprietario.model.js";
 
-const Animal = db.define(
+const Animal = sequelize.define(
   "animais",
   {
     animalId: {

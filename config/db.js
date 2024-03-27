@@ -7,4 +7,4 @@ const sequelize = new Sequelize(process.env.PG_DATABASE, {
   },
 });
 
-export default sequelize;
+export { sequelize };

@@ -34,4 +34,19 @@ function validateAnimal(animal) {
   validateId(proprietarioId, "Proprietário");
 }
 
-export { validateId, validateProprietario, validateAnimal };
+function validateServico(servico) {
+  const { descricao, valor, animalId } = servico;
+
+  if (
+    !descricao ||
+    !valor ||
+    typeof descricao !== "string" ||
+    typeof valor !== "number"
+  ) {
+    const error = errorHandler(400, `Informe Descrição e Valor válidos.`);
+    throw error;
+  }
+  validateId(animalId, "Animal");
+}
+
+export { validateId, validateProprietario, validateAnimal, validateServico };
