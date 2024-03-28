@@ -1,5 +1,5 @@
 import Sequelize from "sequelize";
-import mongodb from "mongodb";
+import mongoose from "mongoose";
 
 // PostgreSQL
 const sequelize = new Sequelize(process.env.POSTGRESQL_URI, {
@@ -10,14 +10,11 @@ const sequelize = new Sequelize(process.env.POSTGRESQL_URI, {
 });
 
 // MongoDB
-function getMongodbClient() {
-  const client = new mongodb.MongoClient(process.env.MONGODB_URI, {
+async function connectMongodb() {
+  return await mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  return client;
 }
 
-export { sequelize, getMongodbClient };
-
-//
+export { sequelize, connectMongodb };

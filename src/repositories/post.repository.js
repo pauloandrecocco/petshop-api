@@ -1,86 +1,80 @@
-import { ObjectId } from "mongodb";
-
 // Database
-import { getMongodbClient } from "../../config/db.js";
+import { connectMongodb } from "../../config/db.js";
+
+// Schemas
+import PostSchema from "../schemas/post.schema.js";
 
 // Utils
 import { errorHandler } from "../utils/error-handler.js";
 
-async function getPostById(objectId) {
-  const client = getMongodbClient();
+async function getPostById(id) {
   try {
-    await client.connect();
+    const mongoose = await connectMongodb();
 
-    return await client
-      .db("petshop")
-      .collection("posts")
-      .findOne({ _id: objectId });
+    const Post = mongoose.model("Post", PostSchema);
+    return await Post.findById(id);
   } catch (err) {
     throw err;
     // const error = errorHandler(500, err.message);
     //throw error;
-  } finally {
-    client.close();
+  }
+}
+
+async function updatePost(post) {
+  try {
+    const mongoose = await connectMongodb();
+
+    const Post = mongoose.model("Post", PostSchema);
+    await Post.findByIdAndUpdate(post._id, post);
+
+    return await getPostById(post._id);
+  } catch (err) {
+    throw err;
+    // const error = errorHandler(500, err.message);
+    //throw error;
   }
 }
 
 async function createPost(post) {
-  const client = getMongodbClient();
   try {
-    await client.connect();
+    const mongoose = await connectMongodb();
 
-    const postId = (
-      await client.db("petshop").collection("posts").insertOne(post)
-    ).insertedId;
+    const Post = mongoose.model("Post", PostSchema);
+    post = new Post(post);
+    await post.save();
 
-    return await getPostById(postId);
+    return await getPostById(post._id);
   } catch (err) {
     throw err;
     // const error = errorHandler(500, err.message);
     //throw error;
-  } finally {
-    client.close();
   }
 }
 
 async function listPosts() {
-  const client = getMongodbClient();
   try {
-    await client.connect();
+    const mongoose = await connectMongodb();
 
-    return await client.db("petshop").collection("posts").find({}).toArray();
+    const Post = mongoose.model("Post", PostSchema);
+
+    return await Post.find({});
   } catch (err) {
     throw err;
     // const error = errorHandler(500, err.message);
     //throw error;
-  } finally {
-    client.close();
   }
 }
 
 async function createComentario(postId, comentario) {
-  const client = getMongodbClient();
   try {
-    await client.connect();
-
-    const objectId = new ObjectId(postId);
-    const post = await getPostById(objectId);
-
-    if (!post.comentarios) post.comentarios = [];
+    const post = await getPostById(postId);
     post.comentarios.push(comentario);
 
-    await client
-      .db("petshop")
-      .collection("posts")
-      .updateOne({ _id: objectId }, { $set: { ...post } });
-
-    return post;
+    return await updatePost(post);
   } catch (err) {
     throw err;
     // const error = errorHandler(500, err.message);
     //throw error;
-  } finally {
-    client.close();
   }
 }
 
