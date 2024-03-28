@@ -5,6 +5,7 @@ import cors from "cors";
 
 // Routers
 import animalRouter from "./src/routes/animal.route.js";
+import postRouter from "./src/routes/post.route.js";
 import proprietarioRouter from "./src/routes/proprietario.route.js";
 import servicoRouter from "./src/routes/servico.route.js";
 
@@ -34,6 +35,7 @@ app.use(cors());
 app.use("/proprietarios", proprietarioRouter);
 app.use("/animais", animalRouter);
 app.use("/servicos", servicoRouter);
+app.use("/posts", postRouter);
 
 app.listen(3000, async () => {
   logger.info("API rodando na porta 3000.");

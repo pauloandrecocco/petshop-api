@@ -49,4 +49,6 @@ function validateServico(servico) {
   validateId(animalId, "Animal");
 }
 
+// TODO: implementar validatePost e validadeComentario
+
 export { validateId, validateProprietario, validateAnimal, validateServico };

@@ -26,7 +26,7 @@ async function listProprietarios() {
 
 async function getProprietario(proprietarioId) {
   try {
-    return await Proprietario.findByPk(proprietarioId);
+    return await Proprietario.findByPk(proprietarioId, { raw: true });
   } catch (err) {
     throw err;
     // const error = errorHandler(500, err.message);

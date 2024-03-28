@@ -36,13 +36,13 @@ async function listServicos() {
 
 async function listServicosByProprietarioId(proprietarioId) {
   try {
-    const animaisIds = (
+    const animalIdArray = (
       await AnimalRepository.listAnimaisByProprietarioId(proprietarioId)
     ).map((animal) => animal.animalId);
 
     return await Servico.findAll({
       where: {
-        animalId: animaisIds,
+        animalId: animalIdArray,
       },
     });
   } catch (err) {

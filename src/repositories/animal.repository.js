@@ -47,7 +47,7 @@ async function listAnimaisByProprietarioId(proprietarioId) {
 
 async function getAnimal(animalId) {
   try {
-    return await Animal.findByPk(animalId);
+    return await Animal.findByPk(animalId, { raw: true });
   } catch (err) {
     throw err;
     // const error = errorHandler(500, err.message);

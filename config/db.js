@@ -1,10 +1,23 @@
 import Sequelize from "sequelize";
+import mongodb from "mongodb";
 
-const sequelize = new Sequelize(process.env.PG_DATABASE, {
+// PostgreSQL
+const sequelize = new Sequelize(process.env.POSTGRESQL_URI, {
   dialect: "postgres",
   define: {
     timestamps: false, // Cria colunas 'created_at' e 'updated_at'
   },
 });
 
-export { sequelize };
+// MongoDB
+function getMongodbClient() {
+  const client = new mongodb.MongoClient(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  return client;
+}
+
+export { sequelize, getMongodbClient };
+
+//
